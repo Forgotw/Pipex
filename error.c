@@ -6,7 +6,7 @@
 /*   By: lsohler@student.42.fr <lsohler>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:10:04 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/03/21 18:45:28 by lsohler@stu      ###   ########.fr       */
+/*   Updated: 2023/05/12 11:43:58 by lsohler@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,10 @@ int		error_msg(char *msg)
 		i++;
 	write(STD_ERR, msg, i);
 	return (-1);
+}
+
+void	perror_and_exit(char *error)
+{
+	perror(error);
+	exit(EXIT_FAILURE);
 }

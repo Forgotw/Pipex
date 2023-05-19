@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsohler@student.42.fr <lsohler>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:55:33 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/05/04 14:00:35 by lsohler          ###   ########.fr       */
+/*   Updated: 2023/05/12 11:42:01 by lsohler@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ px_list	*pipex_lstnew(int ac, char **av, int i, char **envp)
 {
 	px_list *list;
 
-	list = (px_list *)malloc(sizeof (*list));
+	list = malloc(sizeof (px_list));
 	//printf("malloc test\n");
 	if (!list )
 		return (NULL);
@@ -101,7 +101,7 @@ f_list	*open_files(int ac, char **av)
 	if (access(av[1], F_OK))
 		exit (error_msg("Invalid infile\n"));
 	files->infile = open(av[1], O_RDONLY);
-	files->outfile = open(av[ac - 1], O_CREAT, 0777 | O_RDWR | O_TRUNC);
+	files->outfile = open(av[ac - 1], O_CREAT | O_RDWR | O_TRUNC, 0777);
 	//printf("infile: %i\noutfile: %i\n", (*files)->infile, (*files)->outfile);
 	if (files->infile < 0 || files->outfile < 0)
 		exit (error_msg("Open error\n"));
