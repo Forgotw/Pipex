@@ -6,7 +6,7 @@
 /*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 11:29:09 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/04/28 11:46:54 by lsohler          ###   ########.fr       */
+/*   Updated: 2023/05/19 13:31:10 by lsohler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ void	free_pipex_struct(px_list **list)
 	while (*list)
 	{
 		tmp = (*list)->next;
-		//printf("test\n");
 		if((*list)->path)
 			free((*list)->path);
 		if ((*list)->cmd)
 			free_split((*list)->cmd);
 		free(*list);
 		*list = tmp;
-		//printf("free test\n");
 	}
 }

@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 16:51:37 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/05/19 15:24:15 by lsohler          ###   ########.fr       */
+/*   Created: 2023/05/19 15:20:01 by lsohler           #+#    #+#             */
+/*   Updated: 2023/05/19 15:20:12 by lsohler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char    *ft_strdup(const char *s1)
+void	*ft_calloc(size_t elementCount, size_t elementSize)
 {
-		char    *s2;
-        int             i;
+	char	*res;
 
-        i = 0;
-        s2 = malloc(sizeof(char) * ft_strlen((char*)s1) + 1);
-        if (!s2)
-                return (NULL);
-        while (s1[i] != '\0')
-        {
-                s2[i] = s1[i];
-                i++;
-        }
-        s2[i] = '\0';
-        return (s2);
+	res = malloc(elementSize * elementCount);
+	if (!res)
+		return (NULL);
+	ft_bzero(res, elementSize * elementCount);
+	return (res);
 }

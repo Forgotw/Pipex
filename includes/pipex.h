@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsohler@student.42.fr <lsohler>            +#+  +:+       +#+        */
+/*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:52:00 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/05/12 11:41:23 by lsohler@stu      ###   ########.fr       */
+/*   Updated: 2023/05/19 16:57:56 by lsohler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,22 @@
 # define STD_OUT 1 
 # define STD_ERR 2
 
-typedef	struct	s_list // command definition struct
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+#endif
+
+typedef	struct	s_list
 {
-	int				child_n;
 	char			**cmd;
 	char			*path;
-	int				fd[2];
 	pid_t			pid;
 	struct	s_list	*next;
 	struct	s_list	*prev;
 }				px_list;
 
-typedef	struct	t_list // pipe utilities
+typedef	struct	t_list
 {
-	int				*fd;
+	int				heredoc;
 	int				infile;
 	int				outfile;
 	pid_t			pid;
@@ -49,17 +51,26 @@ char	**ft_split(char *s, char c);
 char	*ft_strdup(const char *s1);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char *s1, char *s2);
+int		ft_strlen(char *str);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t elementCount, size_t elementSize);
+char	*ft_strchr(const char *string, int searchedChar );
+char	*get_next_line(int fd);
+
 char	**pipex_path_array(char **envp);
 char	*pipex_path(char *cmd, char **envp);
 px_list	*pipex_lstnew(int ac, char **av, int i, char **envp);
-px_list	*pipex_parse(int ac, char **av, char **envp);
+px_list	*pipex_parse(int ac, char **av, char **envp, f_list *files);
 void	free_pipex_struct(px_list **list);
 void 	free_split(char **array);
 f_list	*open_files(int ac, char **av);
-int		error_msg(char *msg);
 void	pipex_child(px_list **child, f_list **file, char **envp);
 void	perror_and_exit(char *error);
 void	execute_commands(px_list **child, f_list *files, char **envp);
+void	here_doc_open(f_list **files, char *limiter);
+void	here_doc_checker(char **av, f_list *files);
+
+
 
 
 
