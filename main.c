@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsohler@student.42.fr <lsohler>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:50:20 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/05/19 15:07:08 by lsohler          ###   ########.fr       */
+/*   Updated: 2023/05/20 12:50:04 by lsohler@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	main(int ac, char **av, char **envp)
 	px_list	*tmp;
 	f_list	*files;
 	
-	/*if (ac < 5)
-		exiterror("Arguments count error\n");*/
+	if (ac < 4)
+		perror_and_exit("Arguments count error\n");
 	files = open_files(ac, av);
 	pipex_list = pipex_parse(ac, av, envp, files);
 	if (files->open == 1)

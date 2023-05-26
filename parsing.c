@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsohler@student.42.fr <lsohler>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:55:33 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/05/19 17:05:15 by lsohler          ###   ########.fr       */
+/*   Updated: 2023/05/20 15:46:08 by lsohler@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*pipex_path(char *cmd, char **envp)
 		i++;
 	}
 	free_split(path_array);
-	return (cmd);
+	return (NULL);
 }
 
 px_list	*pipex_lstnew(int ac, char **av, int i, char **envp)
@@ -67,12 +67,9 @@ px_list	*pipex_lstnew(int ac, char **av, int i, char **envp)
 		return (NULL);
 	list->cmd = ft_split(av[i], ' ');
 	list->path = pipex_path(list->cmd[0], envp);
-	if (!list->path)
-	{
-		write(2, "Command not found\n", 19);
-		exit(EXIT_FAILURE);
-	}
 	list->next = NULL;
+	if (!list->path)
+		cmd_error(&list, list->cmd[0]);
 	list->prev = NULL;
 	return (list);
 }
@@ -104,20 +101,19 @@ f_list	*open_files(int ac, char **av)
 
 	files = malloc(sizeof (f_list));
 	here_doc_checker(av, files);
-	if (files->heredoc == 0)
-		files->infile = open(av[1], O_RDONLY);
 	if (files->heredoc == 1)
 	{
 		limiter = ft_strjoin(av[2], "\n");
-		here_doc_open(&files, limiter);
+		here_doc_open(files, limiter);
 		free(limiter);
 	}
 	else
 	{
 		if (access(av[1], F_OK))
 			perror_and_exit("Infile");
-		files->outfile = open(av[ac - 1], O_CREAT | O_RDWR | O_TRUNC, 0777);
+		files->infile = open(av[1], O_RDONLY);
 	}
+	files->outfile = open(av[ac - 1], O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (files->infile < 0 || files->outfile < 0)
 		perror_and_exit("Open");
 	files->open = 1;

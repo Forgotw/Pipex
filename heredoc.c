@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsohler@student.42.fr <lsohler>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:46:01 by lsohler           #+#    #+#             */
-/*   Updated: 2023/05/19 16:46:47 by lsohler          ###   ########.fr       */
+/*   Updated: 2023/05/20 12:24:33 by lsohler@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	here_doc_checker(char **av, f_list *files)
 		files->heredoc = 0;
 }
 
-void	here_doc_open(f_list **files, char *limiter)
+void	here_doc_open(f_list *files, char *limiter)
 {
 	int		file;
 	char	*line;
@@ -43,8 +43,8 @@ void	here_doc_open(f_list **files, char *limiter)
 		free(line);
 	}
 	close(file);
-	(*files)->infile = open (".here_doc", O_RDONLY);
-	if ((*files)->infile < 0)
+	files->infile = open (".here_doc", O_RDONLY);
+	if (files->infile < 0)
 	{
 		unlink(".here_doc");
 		perror_and_exit("Open here_doc 2");

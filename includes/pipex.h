@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lsohler@student.42.fr <lsohler>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:52:00 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/05/19 16:57:56 by lsohler          ###   ########.fr       */
+/*   Updated: 2023/05/20 15:27:52 by lsohler@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void 	free_split(char **array);
 f_list	*open_files(int ac, char **av);
 void	pipex_child(px_list **child, f_list **file, char **envp);
 void	perror_and_exit(char *error);
+void	cmd_error(px_list **list, char *cmd);
 void	execute_commands(px_list **child, f_list *files, char **envp);
-void	here_doc_open(f_list **files, char *limiter);
+void	here_doc_open(f_list *files, char *limiter);
 void	here_doc_checker(char **av, f_list *files);
 
 

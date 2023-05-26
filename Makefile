@@ -7,9 +7,9 @@ HEADER_SRCS = pipex.h
 HEADER = $(addprefix $(INCLUDES), $(HEADER_SRCS))
 
 # SOURCES #
-SRCS = main.c parsing.c free.c error.c child.c
+SRCS = main.c parsing.c free.c error.c child.c heredoc.c
 LIBFT_DIR = libft/
-LIBFT_FUNC = ft_split.c ft_strdup.c ft_strjoin.c ft_strncmp.c
+LIBFT_FUNC = ft_split.c ft_strdup.c ft_strjoin.c ft_strncmp.c ft_strlen.c get_next_line.c ft_calloc.c ft_bzero.c ft_strchr.c
 LIBFT_SRCS = $(addprefix $(LIBFT_DIR), $(LIBFT_FUNC))
 OBJS = $(SRCS:.c=.o)
 LIBFT_OBJS = $(LIBFT_SRCS:.c=.o)
