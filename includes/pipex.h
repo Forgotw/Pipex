@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsohler@student.42.fr <lsohler>            +#+  +:+       +#+        */
+/*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:52:00 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/05/20 15:27:52 by lsohler@stu      ###   ########.fr       */
+/*   Updated: 2023/07/02 14:14:49 by lsohler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,25 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
-#endif
+# endif
 
-typedef	struct	s_list
+typedef struct s_list
 {
 	char			**cmd;
 	char			*path;
 	pid_t			pid;
-	struct	s_list	*next;
-	struct	s_list	*prev;
-}				px_list;
+	struct s_list	*next;
+	struct s_list	*prev;
+}				t_list;
 
-typedef	struct	t_list
+typedef struct t_list
 {
 	int				heredoc;
 	int				infile;
 	int				outfile;
 	pid_t			pid;
 	int				open;
-}				f_list;
+}				t_files;
 
 char	**ft_split(char *s, char c);
 char	*ft_strdup(const char *s1);
@@ -59,22 +59,16 @@ char	*get_next_line(int fd);
 
 char	**pipex_path_array(char **envp);
 char	*pipex_path(char *cmd, char **envp);
-px_list	*pipex_lstnew(int ac, char **av, int i, char **envp);
-px_list	*pipex_parse(int ac, char **av, char **envp, f_list *files);
-void	free_pipex_struct(px_list **list);
-void 	free_split(char **array);
-f_list	*open_files(int ac, char **av);
-void	pipex_child(px_list **child, f_list **file, char **envp);
+t_list	*pipex_lstnew(int ac, char **av, int i, char **envp);
+t_list	*pipex_parse(int ac, char **av, char **envp, t_files *files);
+void	free_pipex_struct(t_list **list);
+void	free_split(char **array);
+t_files	*open_files(int ac, char **av);
+void	pipex_child(t_list **child, t_files **file, char **envp);
 void	perror_and_exit(char *error);
-void	cmd_error(px_list **list, char *cmd);
-void	execute_commands(px_list **child, f_list *files, char **envp);
-void	here_doc_open(f_list *files, char *limiter);
-void	here_doc_checker(char **av, f_list *files);
-
-
-
-
-
-
+void	cmd_error(t_list **list, char *cmd);
+void	execute_commands(t_list **child, t_files *files, char **envp);
+void	here_doc_open(t_files *files, char *limiter);
+void	here_doc_checker(char **av, t_files *files);
 
 #endif

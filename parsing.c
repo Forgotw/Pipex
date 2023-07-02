@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsohler@student.42.fr <lsohler>            +#+  +:+       +#+        */
+/*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:55:33 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/05/20 15:46:08 by lsohler@stu      ###   ########.fr       */
+/*   Updated: 2023/07/02 14:16:05 by lsohler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ char	*pipex_path(char *cmd, char **envp)
 	return (NULL);
 }
 
-px_list	*pipex_lstnew(int ac, char **av, int i, char **envp)
+t_list	*pipex_lstnew(int ac, char **av, int i, char **envp)
 {
-	px_list	*list;
+	t_list	*list;
 
-	list = malloc(sizeof (px_list));
+	list = malloc(sizeof (t_list));
 	if (!list)
 		return (NULL);
 	list->cmd = ft_split(av[i], ' ');
@@ -74,10 +74,10 @@ px_list	*pipex_lstnew(int ac, char **av, int i, char **envp)
 	return (list);
 }
 
-px_list	*pipex_parse(int ac, char **av, char **envp, f_list *files)
+t_list	*pipex_parse(int ac, char **av, char **envp, t_files *files)
 {
-	px_list	*pipex_list;
-	px_list	*top;
+	t_list	*pipex_list;
+	t_list	*top;
 	int		i;
 
 	i = 2;
@@ -94,12 +94,12 @@ px_list	*pipex_parse(int ac, char **av, char **envp, f_list *files)
 	return (top);
 }
 
-f_list	*open_files(int ac, char **av)
+t_files	*open_files(int ac, char **av)
 {
-	f_list	*files;
+	t_files	*files;
 	char	*limiter;
 
-	files = malloc(sizeof (f_list));
+	files = malloc(sizeof (t_files));
 	here_doc_checker(av, files);
 	if (files->heredoc == 1)
 	{
