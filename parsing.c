@@ -6,7 +6,7 @@
 /*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:55:33 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/07/02 14:16:05 by lsohler          ###   ########.fr       */
+/*   Updated: 2023/07/02 14:46:48 by lsohler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ t_list	*pipex_lstnew(int ac, char **av, int i, char **envp)
 	list->cmd = ft_split(av[i], ' ');
 	list->path = pipex_path(list->cmd[0], envp);
 	list->next = NULL;
-	if (!list->path)
-		cmd_error(&list, list->cmd[0]);
+	//if (!list->path)
+	//	cmd_error(&list, list->cmd[0]);
 	list->prev = NULL;
 	return (list);
 }

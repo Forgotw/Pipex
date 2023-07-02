@@ -16,7 +16,8 @@ LIBFT_OBJS = $(LIBFT_SRCS:.c=.o)
 
 # UTILS #
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextral
+#CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 RM = rm -rf
 
 # COLORS #

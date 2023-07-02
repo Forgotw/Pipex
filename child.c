@@ -6,7 +6,7 @@
 /*   By: lsohler <lsohler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:59:21 by lsohler@stu       #+#    #+#             */
-/*   Updated: 2023/07/02 14:16:05 by lsohler          ###   ########.fr       */
+/*   Updated: 2023/07/02 15:30:52 by lsohler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	redir_child(t_list *cur, t_files *files, int *pipefd, int prev_pipe_in)
 {
+	if (!cur->path)
+		cmd_error(&cur, cur->cmd[0]);
 	if (cur->prev == NULL)
 		dup2(files->infile, STDIN_FILENO);
 	else
